@@ -3,8 +3,7 @@ LEARNING ENVIRONMENT FOR NB-DQN
 
 ### Repository setup
 ```sh
-git submodule init
-git submodule update
+ln -s /path/to/maze_generator maze_generator
 ```
 
 ### Requirements

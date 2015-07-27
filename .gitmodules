@@ -1,3 +1,0 @@
-[submodule "maze_generator"]
-	path = maze_generator
-	url = https://github.com/NB-DQN/maze_generator.git
