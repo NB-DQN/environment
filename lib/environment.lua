@@ -34,10 +34,6 @@ function Environment:cell(coordinate)
   return { coordinate[1] + shift_x, coordinate[2] + shift_y }
 end
 
-function Environment:wall(coordinate)
-  return self.maze:wall(self:cell(coordinate))
-end
-
 function Environment:move(direction)
   local neighbor = {
     { self.current_coordinate[1] - 1, self.current_coordinate[2]     },
@@ -45,7 +41,7 @@ function Environment:move(direction)
     { self.current_coordinate[1] + 1, self.current_coordinate[2]     },
     { self.current_coordinate[1],     self.current_coordinate[2] - 1 },
   }
-  if self:wall(self.current_coordinate)[direction] == 0 then
+  if self:wall()[direction] == 0 then
     self.current_coordinate = neighbor[direction]
   end
   self.move_count = self.move_count + 1
@@ -67,4 +63,15 @@ function Environment:check_novelty()
     self.novelty = 10
     self.history[#self.history + 1] = self.current_coordinate
   end
+end
+
+function Environment:wall()
+  return self.maze:wall(self:cell(self.current_coordinate))
+end
+
+function Environment:reset()
+  self.current_coordinate = { 0, 0 }
+  self.move_count = 0
+  self.history = { { 0, 0 } }
+  self.novelty = 0
 end
